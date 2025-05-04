@@ -4,6 +4,7 @@ import com.example.postech_tc4_pedido_receiver.dto.PedidoDTO;
 import com.example.postech_tc4_pedido_receiver.entities.ClienteEntity;
 import com.example.postech_tc4_pedido_receiver.entities.PagamentoEntity;
 import com.example.postech_tc4_pedido_receiver.entities.ProdutoEntity;
+import com.example.postech_tc4_pedido_receiver.entities.StatusPedidoEnum;
 import com.example.postech_tc4_pedido_receiver.usecases.PostarPedidoUseCase;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;
@@ -48,7 +49,8 @@ public class PedidoControllerTest {
         ClienteEntity cliente = new ClienteEntity("Maria Silva");
         ProdutoEntity produto = new ProdutoEntity("SKU-001", 2);
         PagamentoEntity pagamento = new PagamentoEntity("4111111111111111");
-        PedidoDTO pedidoDTO = new PedidoDTO(cliente, List.of(produto), pagamento);
+        StatusPedidoEnum status = StatusPedidoEnum.ABERTO;
+        PedidoDTO pedidoDTO = new PedidoDTO(cliente, List.of(produto), pagamento, status);
 
         mockMvc.perform(post("/pedidos")
                         .contentType(MediaType.APPLICATION_JSON)
@@ -60,7 +62,7 @@ public class PedidoControllerTest {
 
     @Test
     public void deveRetornar400QuandoPayloadInvalido() throws Exception {
-        PedidoDTO pedidoDTO = new PedidoDTO(null, null, null);
+        PedidoDTO pedidoDTO = new PedidoDTO(null, null, null, null);
 
         doThrow(new IllegalArgumentException("Payload inválido"))
                 .when(postarPedidoUseCase).postarPedido(any(PedidoDTO.class));

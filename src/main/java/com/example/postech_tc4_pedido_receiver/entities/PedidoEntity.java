@@ -5,12 +5,12 @@ import java.util.UUID;
 
 public class PedidoEntity {
     private String id;
-    // como lidar com ID? gerar um no momento que recebe o pedido?
     private ClienteEntity cliente;
     private List<ProdutoEntity> produtos;
     private PagamentoEntity dadosPagamento;
+    private StatusPedidoEnum status;
 
-    public PedidoEntity(ClienteEntity cliente, List<ProdutoEntity> produtos, PagamentoEntity dadosPagamento) {
+    public PedidoEntity(ClienteEntity cliente, List<ProdutoEntity> produtos, PagamentoEntity dadosPagamento, StatusPedidoEnum status) {
 
         if (cliente == null) {
             throw new IllegalArgumentException("É obrigatório informar o cliente");
@@ -27,6 +27,7 @@ public class PedidoEntity {
         this.cliente = cliente;
         this.produtos = produtos;
         this.dadosPagamento = dadosPagamento;
+        this.status = StatusPedidoEnum.ABERTO;
     }
 
     public String getId() {
@@ -40,5 +41,7 @@ public class PedidoEntity {
     public List<ProdutoEntity> getProdutos() { return produtos; }
 
     public PagamentoEntity getDadosPagamento() { return dadosPagamento; }
+
+    public StatusPedidoEnum getStatus() { return status; }
 
 }

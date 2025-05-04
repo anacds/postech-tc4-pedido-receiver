@@ -1,9 +1,6 @@
 package com.example.postech_tc4_pedido_receiver.gateways;
 
-import com.example.postech_tc4_pedido_receiver.entities.ClienteEntity;
-import com.example.postech_tc4_pedido_receiver.entities.PagamentoEntity;
-import com.example.postech_tc4_pedido_receiver.entities.PedidoEntity;
-import com.example.postech_tc4_pedido_receiver.entities.ProdutoEntity;
+import com.example.postech_tc4_pedido_receiver.entities.*;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.kafka.clients.producer.ProducerRecord;
 import org.junit.jupiter.api.BeforeEach;
@@ -39,7 +36,8 @@ public class PedidoGatewayTest {
         ClienteEntity cliente = new ClienteEntity("Maria Silva");
         ProdutoEntity produto = new ProdutoEntity("SKU-001", 1);
         PagamentoEntity pagamento = new PagamentoEntity("4111111111111111");
-        PedidoEntity pedido = new PedidoEntity(cliente, List.of(produto), pagamento);
+        StatusPedidoEnum status = StatusPedidoEnum.ABERTO;
+        PedidoEntity pedido = new PedidoEntity(cliente, List.of(produto), pagamento, status);
 
         when(objectMapper.writeValueAsString(eq(pedido))).thenReturn("{\"cliente\":\"Maria Silva\"}");
 

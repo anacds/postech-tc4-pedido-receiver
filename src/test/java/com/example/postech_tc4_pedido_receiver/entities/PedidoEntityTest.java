@@ -12,8 +12,9 @@ public class PedidoEntityTest {
         ClienteEntity cliente = new ClienteEntity("Maria Silva");
         ProdutoEntity produto = new ProdutoEntity("SKU-001", 1);
         PagamentoEntity pagamento = new PagamentoEntity("4111111111111111");
+        StatusPedidoEnum status = StatusPedidoEnum.ABERTO;
 
-        PedidoEntity pedido = new PedidoEntity(cliente, List.of(produto), pagamento);
+        PedidoEntity pedido = new PedidoEntity(cliente, List.of(produto), pagamento, status);
 
         assertNotNull(pedido.getId());
         assertEquals("Maria Silva", pedido.getCliente().getNome());
@@ -25,9 +26,10 @@ public class PedidoEntityTest {
     public void deveLancarExcecaoSeClienteForNulo() {
         ProdutoEntity produto = new ProdutoEntity("SKU-001", 1);
         PagamentoEntity pagamento = new PagamentoEntity("4111111111111111");
+        StatusPedidoEnum status = StatusPedidoEnum.ABERTO;
 
         IllegalArgumentException ex = assertThrows(IllegalArgumentException.class, () -> {
-            new PedidoEntity(null, List.of(produto), pagamento);
+            new PedidoEntity(null, List.of(produto), pagamento, status);
         });
 
         assertEquals("É obrigatório informar o cliente", ex.getMessage());
@@ -37,14 +39,15 @@ public class PedidoEntityTest {
     public void deveLancarExcecaoSeProdutosForemNulosOuVazios() {
         ClienteEntity cliente = new ClienteEntity("Maria Silva");
         PagamentoEntity pagamento = new PagamentoEntity("4111111111111111");
+        StatusPedidoEnum status = StatusPedidoEnum.ABERTO;
 
         IllegalArgumentException ex1 = assertThrows(IllegalArgumentException.class, () -> {
-            new PedidoEntity(cliente, null, pagamento);
+            new PedidoEntity(cliente, null, pagamento, status);
         });
         assertEquals("A lista de produtos não pode ser vazia", ex1.getMessage());
 
         IllegalArgumentException ex2 = assertThrows(IllegalArgumentException.class, () -> {
-            new PedidoEntity(cliente, List.of(), pagamento);
+            new PedidoEntity(cliente, List.of(), pagamento, status);
         });
         assertEquals("A lista de produtos não pode ser vazia", ex2.getMessage());
     }
@@ -53,9 +56,10 @@ public class PedidoEntityTest {
     public void deveLancarExcecaoSePagamentoForNulo() {
         ClienteEntity cliente = new ClienteEntity("Maria Silva");
         ProdutoEntity produto = new ProdutoEntity("SKU-001", 1);
+        StatusPedidoEnum status = StatusPedidoEnum.ABERTO;
 
         IllegalArgumentException ex = assertThrows(IllegalArgumentException.class, () -> {
-            new PedidoEntity(cliente, List.of(produto), null);
+            new PedidoEntity(cliente, List.of(produto), null, status);
         });
 
         assertEquals("Os dados de pagamento são obrigatórios", ex.getMessage());

@@ -3,9 +3,6 @@ package com.example.postech_tc4_pedido_receiver.usecases;
 import com.example.postech_tc4_pedido_receiver.dto.PedidoDTO;
 import com.example.postech_tc4_pedido_receiver.entities.PedidoEntity;
 import com.example.postech_tc4_pedido_receiver.gateways.PedidoGateway;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -30,7 +27,8 @@ public class PostarPedidoUseCase {
         PedidoEntity pedido = new PedidoEntity(
             pedidoDTO.cliente(),
             pedidoDTO.produtos(),
-            pedidoDTO.dadosPagamento()
+            pedidoDTO.dadosPagamento(),
+            pedidoDTO.status()
         );
 
         pedidoGateway.postarPedidoFila(pedido);

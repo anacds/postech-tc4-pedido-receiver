@@ -1,10 +1,7 @@
 package com.example.postech_tc4_pedido_receiver.usecases;
 
 import com.example.postech_tc4_pedido_receiver.dto.PedidoDTO;
-import com.example.postech_tc4_pedido_receiver.entities.ClienteEntity;
-import com.example.postech_tc4_pedido_receiver.entities.PagamentoEntity;
-import com.example.postech_tc4_pedido_receiver.entities.PedidoEntity;
-import com.example.postech_tc4_pedido_receiver.entities.ProdutoEntity;
+import com.example.postech_tc4_pedido_receiver.entities.*;
 import com.example.postech_tc4_pedido_receiver.gateways.PedidoGateway;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -32,7 +29,8 @@ public class PostarPedidoUseCaseTest {
         ClienteEntity cliente = new ClienteEntity("Maria Silva");
         ProdutoEntity produto = new ProdutoEntity("SKU-001", 1);
         PagamentoEntity pagamento = new PagamentoEntity("4111111111111111");
-        PedidoDTO dto = new PedidoDTO(cliente, List.of(produto), pagamento);
+        StatusPedidoEnum status = StatusPedidoEnum.ABERTO;
+        PedidoDTO dto = new PedidoDTO(cliente, List.of(produto), pagamento, status);
 
         useCase.postarPedido(dto);
 
