@@ -47,12 +47,12 @@ public class PedidoControllerTest {
     @Test
     public void deveAceitarPedidoValidoERetornarStatus202() throws Exception {
         ClienteEntity cliente = new ClienteEntity("Maria Silva");
-        ProdutoEntity produto = new ProdutoEntity("SKU-001", 2);
+        ProdutoEntity produto = new ProdutoEntity("SKU-001", 2, "Nome do produto", "CODIGODEBARRAS", "Descrição do produto", "Fabricante do produto", 9.99, "ARTIGOS ESPORTIVOS");
         PagamentoEntity pagamento = new PagamentoEntity("4111111111111111");
         StatusPedidoEnum status = StatusPedidoEnum.ABERTO;
         PedidoDTO pedidoDTO = new PedidoDTO(cliente, List.of(produto), pagamento, status);
 
-        mockMvc.perform(post("/pedidos")
+        mockMvc.perform(post("/api/pedidos")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(pedidoDTO)))
                 .andExpect(status().isAccepted());
@@ -67,7 +67,7 @@ public class PedidoControllerTest {
         doThrow(new IllegalArgumentException("Payload inválido"))
                 .when(postarPedidoUseCase).postarPedido(any(PedidoDTO.class));
 
-        mockMvc.perform(post("/pedidos")
+        mockMvc.perform(post("/api/pedidos")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(pedidoDTO)))
                 .andExpect(status().isBadRequest());

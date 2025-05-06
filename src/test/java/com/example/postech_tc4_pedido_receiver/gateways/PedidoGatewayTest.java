@@ -34,7 +34,7 @@ public class PedidoGatewayTest {
     public void deveEnviarPedidoParaOTopicoKafka() throws Exception {
         // Arrange
         ClienteEntity cliente = new ClienteEntity("Maria Silva");
-        ProdutoEntity produto = new ProdutoEntity("SKU-001", 1);
+        ProdutoEntity produto = new ProdutoEntity("SKU-001", 2, "Nome do produto", "CODIGODEBARRAS", "Descrição do produto", "Fabricante do produto", 9.99, "ARTIGOS ESPORTIVOS");
         PagamentoEntity pagamento = new PagamentoEntity("4111111111111111");
         StatusPedidoEnum status = StatusPedidoEnum.ABERTO;
         PedidoEntity pedido = new PedidoEntity(cliente, List.of(produto), pagamento, status);
