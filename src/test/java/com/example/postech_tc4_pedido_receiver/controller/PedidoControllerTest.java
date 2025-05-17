@@ -46,7 +46,7 @@ public class PedidoControllerTest {
 
     @Test
     public void deveAceitarPedidoValidoERetornarStatus202() throws Exception {
-        ClienteEntity cliente = new ClienteEntity("Maria Silva");
+        ClienteEntity cliente = new ClienteEntity("Maria Silva", "11111111111");
         ProdutoEntity produto = new ProdutoEntity("SKU-001", 2, "Nome do produto", "CODIGODEBARRAS", "Descrição do produto", "Fabricante do produto", 9.99, "ARTIGOS ESPORTIVOS");
         PagamentoEntity pagamento = new PagamentoEntity("4111111111111111");
         StatusPedidoEnum status = StatusPedidoEnum.ABERTO;

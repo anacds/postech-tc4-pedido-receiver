@@ -26,7 +26,7 @@ public class PostarPedidoUseCaseTest {
     @Test
     public void devePostarPedidoComSucesso() {
 
-        ClienteEntity cliente = new ClienteEntity("Maria Silva");
+        ClienteEntity cliente = new ClienteEntity("Maria Silva", "11111111111");
         ProdutoEntity produto = new ProdutoEntity("SKU-001", 2, "Nome do produto", "CODIGODEBARRAS", "Descrição do produto", "Fabricante do produto", 9.99, "ARTIGOS ESPORTIVOS");
         PagamentoEntity pagamento = new PagamentoEntity("4111111111111111");
         StatusPedidoEnum status = StatusPedidoEnum.ABERTO;
@@ -38,6 +38,7 @@ public class PostarPedidoUseCaseTest {
         verify(pedidoGateway, times(1)).postarPedidoFila(captor.capture());
         assertNotNull(captor.getValue().getId());
         assertEquals("Maria Silva", captor.getValue().getCliente().getNome());
+        assertEquals("11111111111", captor.getValue().getCliente().getCpf());
     }
 
     @Test

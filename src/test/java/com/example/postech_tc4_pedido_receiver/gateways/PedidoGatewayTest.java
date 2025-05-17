@@ -2,7 +2,6 @@ package com.example.postech_tc4_pedido_receiver.gateways;
 
 import com.example.postech_tc4_pedido_receiver.entities.*;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.apache.kafka.clients.producer.ProducerRecord;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.ArgumentCaptor;
@@ -33,7 +32,7 @@ public class PedidoGatewayTest {
     @Test
     public void deveEnviarPedidoParaOTopicoKafka() throws Exception {
         // Arrange
-        ClienteEntity cliente = new ClienteEntity("Maria Silva");
+        ClienteEntity cliente = new ClienteEntity("Maria Silva", "11111111111");
         ProdutoEntity produto = new ProdutoEntity("SKU-001", 2, "Nome do produto", "CODIGODEBARRAS", "Descrição do produto", "Fabricante do produto", 9.99, "ARTIGOS ESPORTIVOS");
         PagamentoEntity pagamento = new PagamentoEntity("4111111111111111");
         StatusPedidoEnum status = StatusPedidoEnum.ABERTO;
